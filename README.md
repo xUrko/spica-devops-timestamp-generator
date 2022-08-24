@@ -34,3 +34,7 @@ Available options:
 - Name
 - Choice between 12 and 24 hour clock
 - Choice on whether to show day of week or not
+
+## Spica QA Assistant
+
+The timestamp generator is also available at [https://spica-qa-assistant.herokuapp.com/](https://spica-qa-assistant.herokuapp.com/).
