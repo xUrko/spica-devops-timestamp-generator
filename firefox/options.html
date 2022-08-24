@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx"
+      crossorigin="anonymous"
+    />
+    <script src="options.js" defer></script>
+    <title>Options</title>
+  </head>
+  <body>
+    <div class="container">
+      <form class="w-50">
+        <div class="form-group m-4">
+          <label for="spica-ext__name"
+            >Current name: <b id="spica-ext__cur-name"></b
+          ></label>
+          <div class="input-group">
+            <input
+              type="text"
+              name=""
+              id="spica-ext__name"
+              class="form-control"
+            />
+            <button
+              class="btn btn-primary input-group-text"
+              id="spica-ext__name-set"
+            >
+              Set name
+            </button>
+          </div>
+        </div>
+        <div class="form-check m-4">
+          <label class="form-check-label" for="spica-ext__12h"
+            >Use 12 hour clock: <b id="spica-ext__cur-12h"></b
+          ></label>
+          <input
+            type="checkbox"
+            name=""
+            id="spica-ext__12h"
+            class="form-check-input"
+          />
+        </div>
+        <div class="form-check m-4">
+          <label class="form-check-label" for="spica-ext__dow"
+            >Add day of week: <b id="spica-ext__cur-dow"></b
+          ></label>
+          <input
+            type="checkbox"
+            name=""
+            id="spica-ext__dow"
+            class="form-check-input"
+          />
+        </div>
+      </form>
+    </div>
+  </body>
+</html>

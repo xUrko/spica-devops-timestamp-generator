@@ -1,0 +1,26 @@
+{
+  "name": "Spica DevOps Timestamp generator",
+  "description": "Generate a timestamp for DevOps descriptions.",
+  "version": "1.0",
+  "manifest_version": 3,
+  "background": {
+    "service_worker": "background.js"
+  },
+  "permissions": ["storage"],
+  "action": {
+    "default_popup": "popup.html",
+    "default_icon": {
+      "16": "/imgs/spica16.png",
+      "32": "/imgs/spica32.png",
+      "48": "/imgs/spica48.png",
+      "128": "/imgs/spica128.png"
+    }
+  },
+  "icons": {
+    "16": "/imgs/spica16.png",
+    "32": "/imgs/spica32.png",
+    "48": "/imgs/spica48.png",
+    "128": "/imgs/spica128.png"
+  },
+  "options_page": "options.html"
+}
