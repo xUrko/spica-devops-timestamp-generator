@@ -22,12 +22,5 @@
     "48": "/imgs/spica48.png",
     "128": "/imgs/spica128.png"
   },
-  "options_page": "options.html",
-  "content_scripts": [
-    {
-      "matches": ["https://dev.azure.com/*"],
-      "css": ["content-style.css"],
-      "js": ["content-script.js"]
-    }
-  ]
+  "options_page": "options.html"
 }
