@@ -26,7 +26,7 @@ const b = document.getElementById("spica-ext__timestamp");
 const gen = document.getElementById("spica-ext__generate");
 const tooltip = document.getElementById("spica-ext__tooltip");
 
-function fallbackCopyTextToClipboard(text) {
+/* function fallbackCopyTextToClipboard(text) {
   var textArea = document.createElement("textarea");
   textArea.value = text;
   // Avoid scrolling to bottom
@@ -71,6 +71,33 @@ function copyToClip(text) {
       }, 2000);
     }
   );
+} */
+
+function copyToClip() {
+  const r = document.createRange();
+  r.selectNodeContents(b);
+  const s = window.getSelection();
+  s.removeAllRanges();
+  s.addRange(r);
+
+  console.log(window.getSelection());
+
+  try {
+    var successful = document.execCommand("copy");
+    if (successful) {
+      tooltip.innerHTML = "Copied to clipboard";
+    } else {
+      tooltip.innerHTML = "Couldn't copy";
+    }
+  } catch (err) {
+    tooltip.innerHTML = err;
+  }
+
+  r.collapse();
+
+  setTimeout(() => {
+    tooltip.innerHTML = "";
+  }, 2000);
 }
 
 function generateTimestamp() {
@@ -97,20 +124,19 @@ function generateTimestamp() {
       time = `${String(hh).padStart(2, "0")}:${mi} ${amOrPm}`;
     }
 
-    const todayString = `Edited by ${
+    const todayString = `🔴 Edited by ${
       result.name
     } on ${dow}${dd} ${mm} ${yyyy} at ${time} (UTC ${
       UTC >= 0 ? "+" + UTC : UTC
-    })`;
+    })  🔴`;
 
-    copyToClip(todayString);
     b.innerHTML = todayString;
+
+    copyToClip();
   });
 }
 
 window.onload = generateTimestamp;
 
 gen.addEventListener("click", generateTimestamp);
-b.addEventListener("click", () => {
-  copyToClip(b.innerHTML);
-});
+b.addEventListener("click", copyToClip);
