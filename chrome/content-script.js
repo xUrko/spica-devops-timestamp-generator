@@ -22,30 +22,37 @@ const dowArr = [
   "Sunday",
 ];
 
-const b = document.getElementById("spica-ext__timestamp");
-const gen = document.getElementById("spica-ext__generate");
-const tooltip = document.getElementById("spica-ext__tooltip");
+const tmstmpWrapper = document.createElement("div");
+const genTimestamp = document.createElement("button");
+genTimestamp.innerHTML = "Timestamp";
+genTimestamp.classList.add("btn-gen");
+tmstmpWrapper.appendChild(genTimestamp);
+let editor = null;
+let editorTemp = null;
 
-function copyToClip() {
-  function listener(e) {
-    try {
-      e.clipboardData.setData("text/html", b.outerHTML);
-      tooltip.innerHTML = "Copied to clipboard";
-    } catch (err) {
-      tooltip.innerHTML = err;
-    }
-    e.preventDefault();
+chrome.storage.sync.get(["dob"], (result) => {
+  if (result.dob) {
+    setInterval(() => {
+      editorTemp =
+        document.querySelector(".html-editor [aria-label='Description']") ||
+        document.querySelector(".html-editor [aria-label='Repro Steps']");
+
+      if (editorTemp && !editor) {
+        console.log("Editor found!");
+        console.log(editorTemp);
+        editor = editorTemp;
+        editor.parentElement.parentElement.prepend(tmstmpWrapper);
+      } else if (!editorTemp) {
+        editor = null;
+        console.log("No editor on page");
+      }
+    }, 2000);
   }
-  document.addEventListener("copy", listener);
-  document.execCommand("copy");
-  document.removeEventListener("copy", listener);
-
-  setTimeout(() => {
-    tooltip.innerHTML = "";
-  }, 2000);
-}
+});
 
 function generateTimestamp() {
+  editor.focus();
+
   const today = new Date();
   const dd = String(today.getDate()).padStart(2, "0");
   const mm = months[today.getMonth()];
@@ -75,13 +82,15 @@ function generateTimestamp() {
       UTC >= 0 ? "+" + UTC : UTC
     }) ${result.emoji}`;
 
+    const div = document.createElement("div");
+    const b = document.createElement("b");
     b.innerHTML = todayString;
-
-    copyToClip();
+    div.appendChild(b);
+    editor.appendChild(div);
   });
 }
 
-window.onload = generateTimestamp;
-
-gen.addEventListener("click", generateTimestamp);
-b.addEventListener("click", copyToClip);
+genTimestamp.addEventListener("click", () => {
+  generateTimestamp();
+  editor.parentElement.scrollTo(0, editor.parentElement.scrollHeight);
+});

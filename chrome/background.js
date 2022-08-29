@@ -3,5 +3,7 @@ chrome.runtime.onInstalled.addListener(() => {
     name: "/change the name in options/",
     h12c: false,
     dow: false,
+    dob: true,
+    emoji: "🔴",
   });
 });

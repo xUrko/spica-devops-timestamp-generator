@@ -26,6 +26,13 @@
     "page": "options.html",
     "browser_style": true
   },
+  "content_scripts": [
+    {
+      "matches": ["https://dev.azure.com/*"],
+      "css": ["content-style.css"],
+      "js": ["content-script.js"]
+    }
+  ],
   "browser_specific_settings": {
     "gecko": {
       "id": "addon@example.com",

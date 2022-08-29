@@ -16,6 +16,13 @@
       "128": "/imgs/spica128.png"
     }
   },
+  "content_scripts": [
+    {
+      "matches": ["https://dev.azure.com/*"],
+      "css": ["content-style.css"],
+      "js": ["content-script.js"]
+    }
+  ],
   "icons": {
     "16": "/imgs/spica16.png",
     "32": "/imgs/spica32.png",

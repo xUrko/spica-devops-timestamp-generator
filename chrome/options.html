@@ -16,6 +16,7 @@
   <body>
     <div class="container">
       <form class="w-50">
+        <h2>General settings</h2>
         <div class="form-group m-4">
           <label for="spica-ext__name"
             >Current name: <b id="spica-ext__cur-name"></b
@@ -32,6 +33,25 @@
               id="spica-ext__name-set"
             >
               Set name
+            </button>
+          </div>
+        </div>
+        <div class="form-group m-4">
+          <label for="spica-ext__emoji"
+            >Current emoji: <b id="spica-ext__cur-emoji"></b
+          ></label>
+          <div class="input-group">
+            <input
+              type="text"
+              name=""
+              id="spica-ext__emoji"
+              class="form-control"
+            />
+            <button
+              class="btn btn-primary input-group-text"
+              id="spica-ext__emoji-set"
+            >
+              Set emoji
             </button>
           </div>
         </div>
@@ -54,6 +74,18 @@
             type="checkbox"
             name=""
             id="spica-ext__dow"
+            class="form-check-input"
+          />
+        </div>
+        <h2>Content script settings</h2>
+        <div class="form-check m-4">
+          <label class="form-check-label" for="spica-ext__dob"
+            >Add "Timestamp" button in DevOps: <b id="spica-ext__cur-dob"></b
+          ></label>
+          <input
+            type="checkbox"
+            name=""
+            id="spica-ext__dob"
             class="form-check-input"
           />
         </div>
