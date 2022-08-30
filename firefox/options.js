@@ -10,7 +10,7 @@ const curEmoji = document.getElementById("spica-ext__cur-emoji");
 const cur12h = document.getElementById("spica-ext__cur-12h");
 const curDow = document.getElementById("spica-ext__cur-dow");
 const curDob = document.getElementById("spica-ext__cur-dob");
-const regex = /^\p{Extended_Pictographic}{1}$/gu;
+const regex = /^\p{Extended_Pictographic}?$/gu;
 
 function saveName(e) {
   e.preventDefault();
@@ -24,7 +24,7 @@ function saveName(e) {
 function saveEmoji(e) {
   e.preventDefault();
   if (!regex.test(emojiInput.value)) {
-    curEmoji.innerHTML = "Only emojis allowed";
+    curEmoji.innerHTML = "Only emojis or empty string allowed";
 
     browser.storage.sync.get(["emoji"], (result) => {
       setTimeout(() => {

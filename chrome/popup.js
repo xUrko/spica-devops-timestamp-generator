@@ -26,7 +26,7 @@ const b = document.getElementById("spica-ext__timestamp");
 const gen = document.getElementById("spica-ext__generate");
 const tooltip = document.getElementById("spica-ext__tooltip");
 
-function copyToClip() {
+function fallbackCopyTextToClipboard() {
   function listener(e) {
     try {
       e.clipboardData.setData("text/html", b.outerHTML);
@@ -45,7 +45,36 @@ function copyToClip() {
   }, 2000);
 }
 
+function copyToClip() {
+  if (!navigator.clipboard) {
+    fallbackCopyTextToClipboard();
+    return;
+  }
+
+  console.log("Clipboard API present");
+
+  const blob = new Blob([b.outerHTML], { type: "text/html" });
+  const clipboardItem = new window.ClipboardItem({ "text/html": blob });
+  navigator.clipboard.write([clipboardItem]).then(
+    function () {
+      tooltip.innerHTML = "Copied to clipboard";
+      setTimeout(() => {
+        tooltip.innerHTML = "";
+      }, 2000);
+    },
+    function (err) {
+      tooltip.innerHTML = err;
+      setTimeout(() => {
+        tooltip.innerHTML = "";
+      }, 2000);
+    }
+  );
+}
+
 function generateTimestamp() {
+  /* const locale = new Intl.Locale("en-GB", { hourCycle: "h12" });
+  let date = new Intl.DateTimeFormat(locale, { dateStyle: 'short', timeStyle: 'short' }).format(new Date()); */
+
   const today = new Date();
   const dd = String(today.getDate()).padStart(2, "0");
   const mm = months[today.getMonth()];
