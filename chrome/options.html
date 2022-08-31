@@ -15,80 +15,85 @@
   </head>
   <body>
     <div class="container">
-      <form class="w-50">
-        <h2>General settings</h2>
-        <div class="form-group m-4">
-          <label for="spica-ext__name"
-            >Current name: <b id="spica-ext__cur-name"></b
-          ></label>
-          <div class="input-group">
+      <form class="d-flex flex-column align-items-center">
+        <div class="w-50 m-2">
+          <h2>General settings</h2>
+          <div class="form-group m-4">
+            <label for="spica-ext__name"
+              >Name</label>
+            <div class="input-group">
+              <input
+                type="text"
+                name=""
+                id="spica-ext__name"
+                class="form-control"
+              />
+            </div>
+          </div>
+          <div class="form-group m-4">
+            <label for="spica-ext__emoji"
+              >Emoji / prefix and suffix</label>
+            <div class="input-group">
+              <input
+                type="text"
+                name=""
+                id="spica-ext__emoji"
+                class="form-control"
+              />
+            </div>
+            <small>Regex removed, accepts everything</small>
+          </div>
+          <div class="form-check m-4">
+            <label class="form-check-label" for="spica-ext__12h"
+              >Use 12 hour clock</label>
             <input
-              type="text"
+              type="checkbox"
               name=""
-              id="spica-ext__name"
-              class="form-control"
+              id="spica-ext__12h"
+              class="form-check-input"
             />
-            <button
-              class="btn btn-primary input-group-text"
-              id="spica-ext__name-set"
-            >
-              Set name
-            </button>
+          </div>
+          <div class="form-group m-4">
+            <label class="form-check-label" for="spica-ext__date-style"
+              >Date style</label>
+            <select id="spica-ext__date-style" class="form-select">
+              <option value="full">Full</option>
+              <option value="long">Long</option>
+              <option value="medium">Medium</option>
+              <option value="short">Short</option>
+            </select>
+          </div>
+          <div class="form-group m-4">
+            <label class="form-check-label" for="spica-ext__time-style"
+              >Time style</label>
+            <select id="spica-ext__time-style" class="form-select">
+              <option value="full">Full</option>
+              <option value="long">Long</option>
+              <option value="medium">Medium</option>
+              <option value="short">Short</option>
+            </select>
           </div>
         </div>
-        <div class="form-group m-4">
-          <label for="spica-ext__emoji"
-            >Current emoji: <b id="spica-ext__cur-emoji"></b
-          ></label>
-          <div class="input-group">
+        <div class="form-group m-4 d-flex flex-column align-items-center">
+          <button id="spica-ext__gen-preview" class="btn btn-secondary">Generate preview</button>
+          <div id="spica-ext__preview-1" style="font-weight: bold;" class="m-2"></div>
+          <div id="spica-ext__preview-2" style="font-weight: bold;" class="m-2"></div>
+        </div>
+        <div class="w-50 m-2">
+          <h2>Content script settings</h2>
+          <div class="form-check m-4">
+            <label class="form-check-label" for="spica-ext__dob"
+              >Add "Timestamp" button in DevOps</label>
             <input
-              type="text"
+              type="checkbox"
               name=""
-              id="spica-ext__emoji"
-              class="form-control"
+              id="spica-ext__dob"
+              class="form-check-input"
             />
-            <button
-              class="btn btn-primary input-group-text"
-              id="spica-ext__emoji-set"
-            >
-              Set emoji
-            </button>
           </div>
-          <small>Only accepts emojis or empty string</small>
-        </div>
-        <div class="form-check m-4">
-          <label class="form-check-label" for="spica-ext__12h"
-            >Use 12 hour clock: <b id="spica-ext__cur-12h"></b
-          ></label>
-          <input
-            type="checkbox"
-            name=""
-            id="spica-ext__12h"
-            class="form-check-input"
-          />
-        </div>
-        <div class="form-check m-4">
-          <label class="form-check-label" for="spica-ext__dow"
-            >Add day of week: <b id="spica-ext__cur-dow"></b
-          ></label>
-          <input
-            type="checkbox"
-            name=""
-            id="spica-ext__dow"
-            class="form-check-input"
-          />
-        </div>
-        <h2>Content script settings</h2>
-        <div class="form-check m-4">
-          <label class="form-check-label" for="spica-ext__dob"
-            >Add "Timestamp" button in DevOps: <b id="spica-ext__cur-dob"></b
-          ></label>
-          <input
-            type="checkbox"
-            name=""
-            id="spica-ext__dob"
-            class="form-check-input"
-          />
+          <div class="d-flex justify-content-center">
+            <button id="spica-ext__save" class="btn btn-primary"><h2>Save all</h2></button>
+          </div>
         </div>
       </form>
     </div>
