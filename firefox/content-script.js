@@ -1,27 +1,3 @@
-const months = [
-  "January",
-  "February",
-  "March",
-  "April",
-  "May",
-  "June",
-  "July",
-  "August",
-  "September",
-  "October",
-  "November",
-  "December",
-];
-const dowArr = [
-  "Monday",
-  "Tuesday",
-  "Wednesday",
-  "Thursday",
-  "Friday",
-  "Saturday",
-  "Sunday",
-];
-
 const tmstmpWrapper = document.createElement("div");
 const genTimestamp = document.createElement("button");
 genTimestamp.innerHTML = "Timestamp";
@@ -30,8 +6,8 @@ tmstmpWrapper.appendChild(genTimestamp);
 let editor = null;
 let editorTemp = null;
 
-browser.storage.sync.get(["dob"], (result) => {
-  if (result.dob) {
+browser.storage.sync.get(["devOpsBtn"], (result) => {
+  if (result.devOpsBtn) {
     setInterval(() => {
       editorTemp =
         document.querySelector(".html-editor [aria-label='Description']") ||
@@ -53,44 +29,52 @@ browser.storage.sync.get(["dob"], (result) => {
 function generateTimestamp() {
   editor.focus();
 
-  const today = new Date();
-  const dd = String(today.getDate()).padStart(2, "0");
-  const mm = months[today.getMonth()];
-  const yyyy = today.getFullYear();
-  let hh = String(today.getHours()).padStart(2, "0");
-  const mi = String(today.getMinutes()).padStart(2, "0");
-  const UTC = -today.getTimezoneOffset() / 60;
+  browser.storage.sync.get(
+    ["name", "h12c", "emoji", "dateStyle", "timeStyle"],
+    (result) => {
+      const { name, hour12, emoji, dateStyle, timeStyle } = result;
 
-  browser.storage.sync.get(["name", "h12c", "dow", "emoji"], (result) => {
-    let dow = "";
-    let time = `${hh}:${mi}`;
+      const hourCycle = hour12 ? "h12" : "h23";
 
-    if (result.dow) {
-      dow = `${dowArr[today.getDay()]}, `;
+      let date = new Intl.DateTimeFormat("en-GB", {
+        dateStyle: dateStyle,
+        timeStyle: timeStyle,
+        hourCycle: hourCycle,
+      }).format(new Date());
+
+      const todayString = `${emoji} Edited by ${name} on ${date} ${emoji}`;
+
+      const div = document.createElement("div");
+      const b = document.createElement("b");
+      b.innerHTML = todayString;
+      div.appendChild(b);
+
+      const divSpacer = document.createElement("div");
+      const br = document.createElement("br");
+      divSpacer.appendChild(br);
+
+      if (
+        !(
+          editor.lastChild.innerHTML.includes("<br>") ||
+          editor.lastChild.innerHTML.includes("<br/>")
+        ) ||
+        editor.lastChild.innerHTML.includes("<img")
+      ) {
+        const divSpacer1 = document.createElement("div");
+        const br1 = document.createElement("br");
+        divSpacer1.appendChild(br1);
+
+        editor.appendChild(divSpacer1);
+      }
+
+      divSpacer.appendChild(br);
+      editor.appendChild(div);
+      editor.appendChild(divSpacer);
     }
-
-    if (result.h12c) {
-      const amOrPm = Number(hh) >= 12 ? "PM" : "AM";
-      hh = Number(hh) % 12 || 12;
-
-      time = `${String(hh).padStart(2, "0")}:${mi} ${amOrPm}`;
-    }
-
-    const todayString = `${result.emoji} Edited by ${
-      result.name
-    } on ${dow}${dd} ${mm} ${yyyy} at ${time} (UTC ${
-      UTC >= 0 ? "+" + UTC : UTC
-    }) ${result.emoji}`;
-
-    const div = document.createElement("div");
-    const b = document.createElement("b");
-    b.innerHTML = todayString;
-    div.appendChild(b);
-    editor.appendChild(div);
-  });
+  );
 }
 
 genTimestamp.addEventListener("click", () => {
   generateTimestamp();
-  editor.parentElement.scrollTo(0, editor.parentElement.scrollHeight);
+  editor.scrollTo(0, editor.parentElement.scrollHeight);
 });
