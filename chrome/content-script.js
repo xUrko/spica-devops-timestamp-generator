@@ -51,8 +51,8 @@ function generateTimestamp() {
       div.appendChild(b);
 
       const divSpacer = document.createElement("div");
-      const br = document.createElement("br");
-      divSpacer.appendChild(br);
+      divSpacer.appendChild(document.createElement("br"));
+      divSpacer.appendChild(document.createElement("br"));
 
       if (
         !(
@@ -62,15 +62,20 @@ function generateTimestamp() {
         editor.lastChild.innerHTML.includes("<img")
       ) {
         const divSpacer1 = document.createElement("div");
-        const br1 = document.createElement("br");
-        divSpacer1.appendChild(br1);
+        divSpacer1.appendChild(document.createElement("br"));
 
         editor.appendChild(divSpacer1);
       }
 
-      divSpacer.appendChild(br);
       editor.appendChild(div);
       editor.appendChild(divSpacer);
+
+      const sel = window.getSelection();
+      sel.removeAllRanges();
+      const range = document.createRange();
+      range.selectNodeContents(editor);
+      sel.addRange(range);
+      sel.collapseToEnd();
     }
   );
 }
