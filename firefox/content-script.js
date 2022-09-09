@@ -30,7 +30,7 @@ function generateTimestamp() {
   editor.focus();
 
   browser.storage.sync.get(
-    ["name", "h12c", "emoji", "dateStyle", "timeStyle"],
+    ["name", "hour12", "emoji", "dateStyle", "timeStyle"],
     (result) => {
       const { name, hour12, emoji, dateStyle, timeStyle } = result;
 
