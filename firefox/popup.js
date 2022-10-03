@@ -52,7 +52,7 @@ function copyToClip() {
 }
 
 function generateTimestamp(canCopy = true) {
-  browser.storage.sync.get(
+  browser.storage.local.get(
     ["name", "hour12", "emoji", "dateStyle", "timeStyle"],
     (result) => {
       const { name, hour12, emoji, dateStyle, timeStyle } = result;
