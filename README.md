@@ -1,3 +1,4 @@
+
 # Spica DevOps Timestamp Generator
 
 Simple extension for generating OnTime like timestamps to be used in DevOps.
@@ -21,6 +22,8 @@ Firefox automatically uninstalls extensions that are added as described below. T
 5.  Click on `Load Temporary Add-on...`
 6.  Select any file within the `...\spica-devops-timestamp-generator\firefox` folder
 
+To prevent needing to re-enter data in options page, set `keepUuidOnUninstall` and `keepStorageOnUninstall` to `true` in `about:config`. You will still need to install the extension every time you launch FF.
+
 ## Differences
 
 - Firefox doesn't allow copying to clipboard without user interaction first, so automatically copying when popup appears is disabled. This means that after opening the popup, the timestamp must be copied manually (Ctrl+C, clicking on timestamp, pressing generate).
@@ -32,8 +35,11 @@ The options page is available on both browsers, but it's easier to access via Ch
 Available options:
 
 - Name
+- Emoji / prefix & suffix
 - Choice between 12 and 24 hour clock
-- Choice on whether to show day of week or not
+- Date style - different lengths and detail
+- Time style - different lengths and detail
+- Add timestamp button in DevOps
 
 ## Spica QA Assistant
 
