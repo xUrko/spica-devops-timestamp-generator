@@ -6,7 +6,7 @@ tmstmpWrapper.appendChild(genTimestamp);
 let editor = null;
 let editorTemp = null;
 
-browser.storage.sync.get(["devOpsBtn"], (result) => {
+browser.storage.local.get(["devOpsBtn"], (result) => {
   if (result.devOpsBtn) {
     setInterval(() => {
       editorTemp =
@@ -29,8 +29,8 @@ browser.storage.sync.get(["devOpsBtn"], (result) => {
 function generateTimestamp() {
   editor.focus();
 
-  browser.storage.sync.get(
-    ["name", "hour12", "emoji", "dateStyle", "timeStyle"],
+  browser.storage.local.get(
+    ["name", "h12c", "emoji", "dateStyle", "timeStyle"],
     (result) => {
       const { name, hour12, emoji, dateStyle, timeStyle } = result;
 

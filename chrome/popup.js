@@ -48,7 +48,7 @@ function copyToClip() {
 }
 
 function generateTimestamp() {
-  chrome.storage.sync.get(
+  chrome.storage.local.get(
     ["name", "hour12", "emoji", "dateStyle", "timeStyle"],
     (result) => {
       const { name, hour12, emoji, dateStyle, timeStyle } = result;

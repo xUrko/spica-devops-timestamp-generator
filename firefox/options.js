@@ -23,7 +23,7 @@ function save(e) {
 
   console.log(setter);
 
-  browser.storage.sync.set(setter, () => {
+  browser.storage.local.set(setter, () => {
     alert("Settings have been saved");
     location.reload();
   });
@@ -55,7 +55,7 @@ saveBtn.addEventListener("click", save);
 previewBtn.addEventListener("click", generateTimestamp);
 
 window.onload = () => {
-  browser.storage.sync.get(
+  browser.storage.local.get(
     ["name", "hour12", "emoji", "dateStyle", "timeStyle", "devOpsBtn"],
     (result) => {
       const { name, hour12, emoji, dateStyle, timeStyle, devOpsBtn } = result;
